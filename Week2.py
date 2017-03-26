@@ -1,22 +1,21 @@
 # PS2
 # -----------------------------------------------------------------------------
+# check if the minimum payment will payoff of the credit card in the pre-determined length
 def monthlyUnpaidBalance(b, p, i, m):
-    for l in range (1, m):
-        b = b - p
-        b = b + i / 12 * b
-    return b == 0
+    for l in range(0, m):
+        b = (b - p) + (i / 12) * (b -p)
+    return b <= 0
 
 def minimumPayment(balance, annualInterestRate, length):
-    for minimum in range (0, balance):
+    for minimum in range(0, balance):
+        if monthlyUnpaidBalance(balance, minimum, annualInterestRate, length) == True:
+            break
+    return minimum
 
-
-
-balance = 10000
-annualInterestRate = 18
+balance = 3926
+annualInterestRate = 0.2
 length = 12
-
-
-
+print("You would need to make a minimum payment of $%8.2f to payoff a balance of $%8.2f in %8.2f months" % (minimumPayment(balance, annualInterestRate, length), balance, length))
 
 # PS1b
 # -----------------------------------------------------------------------------
@@ -32,11 +31,6 @@ def countWord(input, word):
         else:
             w_position = 0
     return word_count
-
-test = 'abobsbobde'
-word = 'bobs'
-print(countWord(test, word))
-
 
 # PS1a
 # -----------------------------------------------------------------------------
